@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_item_height"
+        android:layout_margin="@dimen/card_item_margin"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="@dimen/card_item_height"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/card_dataTextView"
+                android:layout_width="@dimen/card_item_height"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text_size_large">
+            </TextView>
+
+            <TextView
+                android:layout_width="96dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/card_data2TextView" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/card_rateTextView"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/card_titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:text="Title"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_xlarge" />
+            <TextView
+                android:id="@+id/card_memoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text_size_medium"
+                android:text="Memo"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

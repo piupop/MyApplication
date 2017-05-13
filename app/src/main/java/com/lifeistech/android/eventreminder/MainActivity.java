@@ -4,42 +4,67 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.lifeistech.android.eventreminder.model.MyModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
     Realm realm;
+    CardAdapter mCardAdapter;
+    ListView mListView;
+    Button button;
+
+    ArrayList<MyModel> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mListView = (ListView) findViewById(R.id.listView);
+        button = (Button) findViewById(R.id.add_button);
+
         Realm.init(this);
         realm = Realm.getDefaultInstance();
+
         setTitle("イベントリスト");
-
-        ListView listView = (ListView) findViewById(R.id.listView);
-        Button addlist = (Button) findViewById(R.id.);
-
+        //realmに入っているものをすべて表示
         RealmResults<MyModel> model = realm.where(MyModel.class)
                 .findAll();
+        arrayList.addAll(model);
+        arrayList = new ArrayList<MyModel>();
+        mCardAdapter = new CardAdapter(this, 0, arrayList); //アダプターのインスタンス化
+        mListView.setAdapter(mCardAdapter);        //リストにアダプターをセット
 
-        ArrayList<MyModel> arrayList = new ArrayList(model);
+    };
 
-
-
+    public void onClick(View v){
+        Intent intent =new Intent(this, AddeventActivity.class);
+        startActivity(intent);
     }
 
     @Override
-    public void add(View v){
-        Intent intent = new Intent(this, AddeventActivity.class);
-        startActivityForResult(intent, REQUEST_CODE);
+    protected void onResume() {
+        super.onResume();
+
+        arrayList.clear();
+        RealmResults<MyModel> model = realm.where(MyModel.class)
+                .findAll();
+        arrayList.addAll(model);
+        mCardAdapter.notifyDataSetChanged();//データの更新を伝える
     }
+
+
 }

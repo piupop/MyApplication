@@ -11,104 +11,125 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_margin="20dp">
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
 
                 <TextView
-                    android:text="日付"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/date"
-                    android:textSize="24sp" />
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:id="@+id/dateTextview"
+                    android:textSize="24sp"
+                    android:text="日付" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:text="Date"
+                    android:inputType="date"
                     android:ems="10"
                     android:id="@+id/date1"
-                    android:layout_weight="1" />
+                    android:layout_weight="2"
+                    android:hint="開始日" />
 
                 <TextView
                     android:text="～"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:id="@+id/textView8"
                     android:textSize="24sp" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:text="Date"
+                    android:layout_gravity="center"
+                    android:inputType="date"
                     android:ems="10"
                     android:id="@+id/date2"
-                    android:layout_weight="1" />
+                    android:layout_weight="2"
+                    android:hint="終了日" />
 
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:text="タイトル"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/title"
+                    android:layout_weight="3"
+                    android:layout_gravity="center"
+                    android:id="@+id/titleTextview"
                     android:textSize="24sp" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:text="Title"
+                    android:layout_weight="5"
+                    android:inputType="text"
                     android:ems="10"
-                    android:id="@+id/title" />
+                    android:hint="タイトル" />
 
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:text="優先度"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView6"
+                    android:layout_weight="3"
+                    android:layout_gravity="center"
+                    android:id="@+id/rate"
                     android:textSize="24sp" />
 
-                <RatingBar
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator" />
+                    android:layout_weight="5"
+                    android:inputType="number"
+                    android:id="@+id/rateNum"
+                    android:hint="1-5までの数字を入力" />
 
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:text="メモ"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/memo"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:id="@+id/memoTextView"
                     android:textSize="24sp" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:text="memo"
+                    android:layout_weight="5"
+                    android:inputType="textMultiLine"
                     android:ems="10"
-                    android:id="@+id/editText5" />
+                    android:lines="5"
+                    android:id="@+id/memo"
+                    android:hint="メモ" />
             </TableRow>
         </TableLayout>
 
@@ -116,6 +137,7 @@
             android:text="イベント追加"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:id="@+id/addevent"
             android:textSize="24sp"
             android:onClick="add" />

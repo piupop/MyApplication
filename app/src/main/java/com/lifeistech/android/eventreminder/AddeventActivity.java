@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.lifeistech.android.eventreminder.model.MyModel;
 
@@ -13,24 +14,28 @@ import io.realm.Realm;
 public class AddeventActivity extends AppCompatActivity {
     Realm realm;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("イベント追加");
         Realm.init(this);
         realm = Realm.getDefaultInstance();
 
         Intent intent = new Intent();
         Button addevent = (Button)findViewById(R.id.addevent);
 
+
     }
 
     public void add(View v){
         realm.beginTransaction();
         MyModel model = realm.createObject(MyModel.class);
+
         model.setDate1("1");
         model.setDate2("2");
         model.setTitle("あ");
-        model.setRatingbar(3);
+        model.setRate("高");
         model.setMemo("あいうえお");
         realm.commitTransaction();
 
@@ -41,7 +46,7 @@ public class AddeventActivity extends AppCompatActivity {
                 model.setDate1("1");
                 model.setDate2("2");
                 model.setTitle("あ");
-                model.setRatingbar(3);
+                model.setRate("高");
                 model.setMemo("あいうえお");
             }
         }, new Realm.Transaction.OnSuccess() {
