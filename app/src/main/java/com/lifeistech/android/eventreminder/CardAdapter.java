@@ -1,25 +1,41 @@
 package com.lifeistech.android.eventreminder;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.lifeistech.android.eventreminder.model.MyModel;
 
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 /**
  * Created by Marina Hayashi on 2017/05/13.
  */
 
 public class CardAdapter extends ArrayAdapter<MyModel> {
+    Context context;
     List<MyModel> mMyModel; //MyModelの情報をリストに入れたい
+    Realm realm;
+    Activity activity;
 
-    public CardAdapter(Context context, int layoutResourceId, List<MyModel> objects){
+
+    public CardAdapter(Context context, int layoutResourceId, List<MyModel> objects,Realm realm,Activity activity){
         super(context, layoutResourceId, objects);
+        this.realm = realm;
+        this.context = context;
+        this.activity =activity;
 
         mMyModel = objects;
     }
@@ -46,6 +62,7 @@ public class CardAdapter extends ArrayAdapter<MyModel> {
         final MyModel item = getItem(position);
 
         if (item != null){
+            Log.e("id", String.valueOf(item.getId()));
             String rateNumText = String.valueOf(item.getRate());
             //set data
             viewHolder.dateTextView.setText(item.getDate1());
@@ -53,11 +70,38 @@ public class CardAdapter extends ArrayAdapter<MyModel> {
             viewHolder.titleTextView.setText(item.getTitle()); //modelの情報を取得
             viewHolder.rateNumTextView.setText(rateNumText);
             viewHolder.memoTextView.setText(item.getMemo());
+            viewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final RealmResults<MyModel> results = realm.where(MyModel.class).equalTo("id", item.getId()).findAll();
+// All changes to data must happen in a transaction
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            // remove a single object
+                            results.deleteAllFromRealm();
+                        }
+                    });
+                    mMyModel.remove(position);
+                    notifyDataSetChanged();
+                }
+
+            });
+            viewHolder.editButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    final RealmResults<MyModel> results = realm.where(MyModel.class).equalTo("id", item.getId()).findAll();
+                    Intent intent = new Intent(context, AddeventActivity.class);
+                    activity.startActivity(intent);
+                }
+            });
 
         }
 
         return convertView;
     }
+
+
 
     private class ViewHolder{
         TextView dateTextView;
@@ -65,6 +109,8 @@ public class CardAdapter extends ArrayAdapter<MyModel> {
         TextView titleTextView;
         TextView rateNumTextView;
         TextView memoTextView;
+        ImageButton deleteButton;
+        ImageButton editButton;
 
         public ViewHolder(View view){
             //instance
@@ -73,6 +119,8 @@ public class CardAdapter extends ArrayAdapter<MyModel> {
             titleTextView = (TextView) view.findViewById(R.id.card_titleTextView);
             rateNumTextView = (TextView) view.findViewById(R.id.card_rateTextView);
             memoTextView = (TextView) view.findViewById(R.id.card_memoTextView);
+            deleteButton = (ImageButton) view.findViewById(R.id.deleteButton);
+            editButton = (ImageButton) view.findViewById(R.id.editButton);
 
         }
     }

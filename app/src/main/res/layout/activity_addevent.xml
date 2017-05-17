@@ -131,10 +131,14 @@
                     android:layout_weight="5"
                     android:inputType="textMultiLine"
                     android:ems="10"
-                    android:lines="5"
+                    android:lines="3"
                     android:id="@+id/memo"
                     android:hint="メモ" />
             </TableRow>
+            <TableRow>
+
+            </TableRow>>
+
         </TableLayout>
 
         <Button
