@@ -5,13 +5,13 @@ package com.lifeistech.android.eventreminder;
  */
 
 public class Card {
-    public String rate;
+    public int rate;
     public String date;
     public String date2;
     public String title;
     public String memo;
 
-    public Card(String rate, String date, String date2, String title, String memo){
+    public Card(int rate, String date, String date2, String title, String memo){
         this.rate = rate;
         this.date = date;
         this.date2 = date2;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -12,19 +13,38 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/card_dataTextView"
+                android:id="@+id/card_dateTextView"
                 android:layout_width="@dimen/card_item_height"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:textSize="@dimen/text_size_large">
+                android:textSize="@dimen/text_size_large"
+                android:text="date1">
             </TextView>
 
-            <TextView
-                android:layout_width="96dp"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:id="@+id/card_data2TextView" />
+                android:layout_weight="1">
+
+                <TextView
+                    android:text="～"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/textView"
+                    android:layout_weight="1"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:id="@+id/card_date2TextView"
+                    android:textSize="24sp"
+                    android:text="date2" />
+            </LinearLayout>
 
             <TextView
                 android:text="TextView"
@@ -38,24 +58,53 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/card_titleTextView"
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="3"
-                android:text="Title"
-                android:textStyle="bold"
-                android:textSize="@dimen/text_size_xlarge" />
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/card_titleTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="4"
+                    android:text="Title"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_xlarge" />
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    app:srcCompat="@android:drawable/ic_menu_edit"
+                    android:id="@+id/editButton"
+                    android:elevation="0dp"
+                    android:visibility="visible" />
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    app:srcCompat="@android:drawable/ic_menu_delete"
+                    android:id="@+id/deleteButton"
+                    android:onClick="delete" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/card_memoTextView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:layout_gravity="center"
                 android:textSize="@dimen/text_size_medium"
                 android:text="Memo"/>
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

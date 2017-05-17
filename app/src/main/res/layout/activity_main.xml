@@ -16,6 +16,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Spinner
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:layout_width="180dp"
+            android:layout_gravity="right"/>
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -27,7 +33,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/add_button"
-            android:onClick="onClick" />
+            android:onClick="onClick"
+            android:textSize="18sp" />
 
     </LinearLayout>
 </RelativeLayout>

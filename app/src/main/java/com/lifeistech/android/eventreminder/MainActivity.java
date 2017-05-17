@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -19,12 +20,19 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class MainActivity extends AppCompatActivity {
     Realm realm;
     CardAdapter mCardAdapter;
     ListView mListView;
     Button button;
+    ImageButton mEditButton;
+    ImageButton mDeleteButton;
+
+    private Spinner spinner;
+    private String spinnerItem[] = {"優先度が高い順", "優先度が低い順"};
+
 
     ArrayList<MyModel> arrayList;
 
@@ -35,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
 
         mListView = (ListView) findViewById(R.id.listView);
         button = (Button) findViewById(R.id.add_button);
+        mEditButton = (ImageButton) findViewById(R.id.editButton);
+        mDeleteButton = (ImageButton) findViewById(R.id.deleteButton);
+
+        //spinnerの設定
+        spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerItem);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
 
         Realm.init(this);
         realm = Realm.getDefaultInstance();
@@ -43,11 +60,10 @@ public class MainActivity extends AppCompatActivity {
         //realmに入っているものをすべて表示
         RealmResults<MyModel> model = realm.where(MyModel.class)
                 .findAll();
+        arrayList = new ArrayList<MyModel>();//インスタンスを先に作成
         arrayList.addAll(model);
-        arrayList = new ArrayList<MyModel>();
         mCardAdapter = new CardAdapter(this, 0, arrayList); //アダプターのインスタンス化
         mListView.setAdapter(mCardAdapter);        //リストにアダプターをセット
-
     };
 
     public void onClick(View v){
@@ -64,6 +80,24 @@ public class MainActivity extends AppCompatActivity {
                 .findAll();
         arrayList.addAll(model);
         mCardAdapter.notifyDataSetChanged();//データの更新を伝える
+    }
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Spinner spinner = (Spinner) parent;
+        String item = (String) spinner.getSelectedItem();
+
+        if (item.equals("優先度が高い順")) {
+            arrayList.clear();
+            RealmResults<MyModel> model = realm.where(MyModel.class).findAll();
+            model= model.sort("rate", Sort.DESCENDING);// 降順にソート
+        } else if (item.equals("優先度が低い順")) {
+            arrayList.clear();
+            RealmResults<MyModel> model = realm.where(MyModel.class).findAll();
+            model = model.sort("rate"); // 昇順にソート
+        }
+        }
+
+    public void delete(){
+        getItem(position);
     }
 
 

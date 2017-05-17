@@ -10,7 +10,7 @@ public class MyModel extends RealmObject {
     private String date1;
     private String date2;
     private String title;
-    private String rate;
+    private int rate;
     private String memo;
 
     public String getDate1() {
@@ -37,9 +37,9 @@ public class MyModel extends RealmObject {
         this.title = title;
     }
 
-    public String getRate(){ return rate;}
+    public int getRate(){ return rate;}
 
-    public void setRate(String rate){ this.rate = rate;}
+    public void setRate(int rate){ this.rate = rate;}
 
     public String getMemo() {
         return memo;

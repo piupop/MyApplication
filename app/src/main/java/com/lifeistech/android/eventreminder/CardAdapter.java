@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.lifeistech.android.eventreminder.model.MyModel;
@@ -48,11 +46,12 @@ public class CardAdapter extends ArrayAdapter<MyModel> {
         final MyModel item = getItem(position);
 
         if (item != null){
+            String rateNumText = String.valueOf(item.getRate());
             //set data
             viewHolder.dateTextView.setText(item.getDate1());
             viewHolder.date2TextView.setText(item.getDate2());
             viewHolder.titleTextView.setText(item.getTitle()); //modelの情報を取得
-            viewHolder.rateTextView.setText(item.getRate());
+            viewHolder.rateNumTextView.setText(rateNumText);
             viewHolder.memoTextView.setText(item.getMemo());
 
         }
@@ -64,15 +63,15 @@ public class CardAdapter extends ArrayAdapter<MyModel> {
         TextView dateTextView;
         TextView date2TextView;
         TextView titleTextView;
-        TextView rateTextView;
+        TextView rateNumTextView;
         TextView memoTextView;
 
         public ViewHolder(View view){
             //instance
-            dateTextView = (TextView) view.findViewById(R.id.card_dataTextView);
-            date2TextView = (TextView) view.findViewById(R.id.card_data2TextView);
+            dateTextView = (TextView) view.findViewById(R.id.card_dateTextView);
+            date2TextView = (TextView) view.findViewById(R.id.card_date2TextView);
             titleTextView = (TextView) view.findViewById(R.id.card_titleTextView);
-            rateTextView = (TextView) view.findViewById(R.id.card_rateTextView);
+            rateNumTextView = (TextView) view.findViewById(R.id.card_rateTextView);
             memoTextView = (TextView) view.findViewById(R.id.card_memoTextView);
 
         }
