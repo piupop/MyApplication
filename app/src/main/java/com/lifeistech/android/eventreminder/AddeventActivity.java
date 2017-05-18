@@ -7,8 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
+
 
 import com.lifeistech.android.eventreminder.model.MyModel;
 
@@ -16,9 +15,6 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
-import static com.lifeistech.android.eventreminder.R.id.card_dateTextView;
-import static com.lifeistech.android.eventreminder.R.id.date1;
-import static com.lifeistech.android.eventreminder.R.id.dateTextview;
 
 public class AddeventActivity extends AppCompatActivity {
     Realm realm;
@@ -47,6 +43,20 @@ public class AddeventActivity extends AppCompatActivity {
         editRateNum = (EditText) findViewById(R.id.rateNum);
         editMemo = (EditText) findViewById(R.id.memo);
 
+        //intentの受け取りとテキストの表示
+        Intent intent = getIntent();
+        String reEditDate1 = intent.getStringExtra("date1ToEdit");
+        String reEditDate2 = intent.getStringExtra("date2ToEdit");
+        String reEditTitle = intent.getStringExtra("titleToEdit");
+        String reEditMemo = intent.getStringExtra("memoToEdit");
+        String reEditRate = intent.getStringExtra("rateToEdit");
+        int reEditId = intent.getIntExtra("idToEdit", 0);
+
+        editDate1.setText(reEditDate1);
+        editDate2.setText(reEditDate2);
+        editTitle.setText(reEditTitle);
+        editMemo.setText(reEditMemo);
+        editRateNum.setText(reEditRate);
 
     }
 
@@ -60,9 +70,7 @@ public class AddeventActivity extends AppCompatActivity {
                 int id =0;
                 if (result.size() != 0 ){
                     id = result.sort("id", Sort.ASCENDING).last().getId()+1;
-                }
-
-
+                } //realmにデータが存在するときはIDを追加
 
                 MyModel model = bgRealm.createObject(MyModel.class,id);
                 String date1Text = editDate1.getText().toString();
@@ -93,13 +101,8 @@ public class AddeventActivity extends AppCompatActivity {
         });
     }
 
-    protected void {
-        
-        editDate1.setText();
-        editDate2.setText();
-        editTitle.setText();
-        editRateNum.setText();
-        editMemo.setText();
+    public void cancel(View v){
+        finish();
     }
 
 

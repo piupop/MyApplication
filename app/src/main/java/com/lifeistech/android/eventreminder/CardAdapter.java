@@ -78,20 +78,35 @@ public class CardAdapter extends ArrayAdapter<MyModel> {
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            // remove a single object
-                            results.deleteAllFromRealm();
+                            results.deleteAllFromRealm();//realm側のデータを削除
                         }
                     });
-                    mMyModel.remove(position);
-                    notifyDataSetChanged();
+                    mMyModel.remove(position); //listviewから削除
+                    notifyDataSetChanged();//変更を知らせる
                 }
 
             });
             viewHolder.editButton.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    final RealmResults<MyModel> results = realm.where(MyModel.class).equalTo("id", item.getId()).findAll();
+                    final RealmResults<MyModel> reEditData = realm.where(MyModel.class).equalTo("id", item.getId()).findAll(); //クリックされた部分のid
+                    //データの取得
+                    String reEditDate1 = item.getDate1();
+                    String reEditDate2 = item.getDate2();
+                    String reEditTitle = item.getTitle();
+                    String reEditMemo = item.getMemo();
+                    int reEditId = item.getId();
+                    int reEditRate = item.getRate();
+                    String reEditRateNum = String.valueOf(reEditRate);
+
                     Intent intent = new Intent(context, AddeventActivity.class);
+                    //データの引き渡し
+                    intent.putExtra("date1ToEdit", reEditDate1);
+                    intent.putExtra("date2ToEdit", reEditDate2);
+                    intent.putExtra("titleToEdit", reEditTitle);
+                    intent.putExtra("memoToEdit", reEditMemo);
+                    intent.putExtra("rateToEdit", reEditRateNum);
+                    intent.putExtra("idToEdit", reEditId);
                     activity.startActivity(intent);
                 }
             });
