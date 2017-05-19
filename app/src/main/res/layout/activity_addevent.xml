@@ -35,7 +35,8 @@
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="date"
+                    android:inputType="datetime"
+                    android:maxLength="4"
                     android:ems="10"
                     android:id="@+id/date1"
                     android:layout_weight="2"
@@ -54,7 +55,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:inputType="date"
+                    android:inputType="datetime"
+                    android:maxLength="4"
                     android:ems="10"
                     android:id="@+id/date2"
                     android:layout_weight="2"
@@ -71,6 +73,7 @@
                     android:text="タイトル"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:layout_weight="3"
                     android:layout_gravity="center"
                     android:id="@+id/titleTextview"
@@ -104,6 +107,7 @@
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:maxLength="1"
                     android:layout_weight="5"
                     android:inputType="number"
                     android:id="@+id/rateNum"
@@ -132,6 +136,7 @@
                     android:inputType="textMultiLine"
                     android:ems="10"
                     android:lines="3"
+                    android:maxLines="3"
                     android:id="@+id/memo"
                     android:hint="メモ" />
             </TableRow>
@@ -145,19 +150,24 @@
             android:text="キャンセル"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:id="@+id/cancel"
-            android:layout_weight="1"
             android:textSize="18sp"
+            android:background="@color/colorPrimary"
+            android:textColor="#FFFFFF"
             android:onClick="cancel" />
 
         <Button
-            android:text="イベント追加"
+            android:text="保存"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:id="@+id/addevent"
             android:textSize="18sp"
-            android:onClick="add" />
+            android:background="@color/colorAccent"
+            android:textColor="#FFFFFF"
+            android:onClick="add"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 
 </FrameLayout>
